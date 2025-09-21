@@ -1,0 +1,4 @@
+/* In the content wrapper's CSS (where all your sections are placed) */
+.main-content {
+  margin-top: 64px; /* Adjust the value based on the height of the header */
+}
