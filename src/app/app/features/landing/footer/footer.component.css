@@ -1,0 +1,4 @@
+/* footer.component.css */
+.bg-dark-blue {
+  background-color: #1e293b; /* Tailwind 'gray-900' is similar but we can customize if needed */
+}

@@ -1,1 +1,29 @@
-<p>working works!</p>
+<div class="text-center px-4 py-12">
+  <h2 class="text-2xl md:text-4xl font-bold text-gray-900">
+    How <span class="text-gradient">It Works</span>
+  </h2>
+  <p class="text-sm md:text-base text-gray-600 mt-2 max-w-2xl mx-auto">
+    {{ sectionSubtitle }}
+  </p>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center items-stretch gap-8 px-4 pb-12">
+  <div *ngFor="let step of steps" class="flex-1 text-center">
+    <div class="flex justify-center mb-4">
+      <div
+        class="w-12 h-12 rounded-full text-white text-xl flex items-center justify-center"
+        [ngClass]="step.iconColor">
+        {{ step.icon }}
+      </div>
+    </div>
+
+    <h3 class="font-semibold text-base md:text-lg text-gray-900 border-b-2 inline-block pb-1"
+        [ngClass]="step.underlineColor">
+      {{ step.title }}
+    </h3>
+
+    <p class="mt-2 text-sm text-gray-600 max-w-xs mx-auto">
+      {{ step.description }}
+    </p>
+  </div>
+</div>

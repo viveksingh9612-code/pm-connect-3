@@ -8,3 +8,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@media (min-width: 640px) {
+  /* Grid structure for larger screens (sm and above) */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
