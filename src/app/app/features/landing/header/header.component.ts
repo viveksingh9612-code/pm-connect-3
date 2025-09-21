@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,15 @@ export class HeaderComponent {
     { label: 'Gallery', link: '/gallery' },
     { label: 'Contact', link: '/contact' },
   ];
+
+  constructor(private router: Router) {
+
+  }
+
+  login() {
+    console.log('Login clicked');
+    this.router.navigate(['/login']);
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
