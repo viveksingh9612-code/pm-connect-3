@@ -3,12 +3,37 @@ import { CommonModule } from '@angular/common';
 
 import { FeatureRoutingModule } from './features-routing.module';
 import { LoginComponent } from './auth/login/login.component';
+import { MainComponent } from './landing/main/main.component';
+import { AnalyticsComponent } from './landing/analytics/analytics.component';
+import { ContactComponent } from './landing/contact/contact.component';
+import { DemoComponent } from './landing/demo/demo.component';
+import { DocumentComponent } from './landing/document/document.component';
+import { FooterComponent } from './landing/footer/footer.component';
+import { GalleryComponent } from './landing/gallery/gallery.component';
+import { HeaderComponent } from './landing/header/header.component';
+import { HelpComponent } from './landing/help/help.component';
+import { HeroComponent } from './landing/hero/hero.component';
+import { TestimonialsComponent } from './landing/testimonials/testimonials.component';
+import { WorkingComponent } from './landing/working/working.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    MainComponent,
+    LoginComponent,
+
+    AnalyticsComponent,
+    ContactComponent,
+    DemoComponent,
+    DocumentComponent,
+    FooterComponent,
+    GalleryComponent,
+    HeaderComponent,
+    HelpComponent,
+    HeroComponent,
+    TestimonialsComponent,
+    WorkingComponent
   ],
   imports: [
     CommonModule,

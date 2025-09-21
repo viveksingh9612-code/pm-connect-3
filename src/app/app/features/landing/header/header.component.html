@@ -1,0 +1,60 @@
+<header class="bg-white shadow rounded-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      
+      <!-- Left Logo + Text -->
+      <div class="flex items-center">
+        <img src="assets/logo/logo.png" alt="Logo" class="h-10 w-10 rounded-md" />
+        <div class="ml-2">
+          <h1 class="text-lg font-bold text-gray-900">Jakson Infra</h1>
+          <span class="text-sm text-blue-800 font-semibold">PM Connect 3.0</span>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+        <a *ngFor="let item of navItems" 
+           [routerLink]="item.link" 
+           class="hover:text-blue-600">
+          {{ item.label }}
+        </a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="hidden md:flex items-center space-x-4">
+        <!-- <img src="assets/icon.png" alt="icon" class="h-8 w-8" /> -->
+        <button class="flex items-center px-4 py-2 rounded-full text-white font-medium bg-gradient-to-r from-red-500 to-blue-600 hover:opacity-90">
+          <i class="mr-2 bi bi-box-arrow-in-right"></i> Login
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="text-gray-700 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               fill="none" viewBox="0 0 24 24" 
+               stroke-width="1.5" stroke="currentColor" 
+               class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-white px-4 pb-4 space-y-2 border-t">
+    <a *ngFor="let item of navItems" 
+       [routerLink]="item.link" 
+       class="block py-2 text-gray-700 hover:text-blue-600">
+      {{ item.label }}
+    </a>
+    <div class="flex items-center justify-between pt-2">
+      <!-- <img src="assets/icon.png" alt="icon" class="h-8 w-8" /> -->
+      <button class="flex items-center px-4 py-2 rounded-full text-white font-medium bg-gradient-to-r from-red-500 to-blue-600 hover:opacity-90">
+        <i class="mr-2 bi bi-box-arrow-in-right"></i> Login
+      </button>
+    </div>
+  </div>
+</header>

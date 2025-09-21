@@ -1,0 +1,54 @@
+<section
+  class="relative bg-cover bg-center bg-no-repeat min-h-screen flex items-center justify-center text-center px-6"
+  [ngStyle]="{ 'background-image': 'url(assets/background/jakson_hq_background.jpg)' }"
+>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-red-600/70 to-blue-900/70"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-3xl text-white">
+    <!-- Badge -->
+    <span class="px-4 py-1 rounded-full bg-white/20 text-sm font-medium text-white tracking-wide">
+      {{ heroData.badge }}
+    </span>
+
+    <!-- Title -->
+    <h1 class="mt-6 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+      {{ heroData.title }}
+    </h1>
+
+    <!-- Subtitle -->
+    <h2 class="mt-4 text-2xl sm:text-3xl font-semibold text-gray-100">
+      {{ heroData.subtitle }}
+    </h2>
+
+    <!-- Description -->
+    <p class="mt-6 text-base sm:text-lg md:text-xl text-gray-200">
+      {{ heroData.description }}
+    </p>
+
+    <!-- Buttons -->
+    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+      <!-- Login Button -->
+      <button
+        class="flex items-center justify-center px-6 py-3 rounded-full text-white font-medium bg-red-600 hover:bg-red-700 transition"
+      >
+        <i class="bi bi-box-arrow-in-right mr-2"></i>
+        {{ heroData.buttons[0].label }}
+      </button>
+
+      <!-- Learn More Button -->
+      <button
+        class="flex items-center justify-center px-6 py-3 rounded-full border border-white text-white font-medium hover:bg-white hover:text-blue-700 transition"
+      >
+        <i class="bi bi-arrow-down-circle mr-2"></i>
+        {{ heroData.buttons[1].label }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll Down Icon -->
+  <div class="absolute bottom-6 text-white animate-bounce">
+    <i class="bi bi-chevron-down text-2xl"></i>
+  </div>
+</section>

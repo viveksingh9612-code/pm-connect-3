@@ -1,0 +1,15 @@
+<div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 p-4">
+  <div *ngFor="let stat of stats"
+       class="w-full sm:w-48 aspect-square flex flex-col justify-center items-center p-4 rounded-lg shadow-sm"
+       [ngClass]="stat.bgColor">
+
+    <div class="flex flex-col items-center justify-center h-full">
+      <div class="w-16 h-16 flex items-center justify-center rounded-full text-white mb-3"
+           [ngClass]="stat.iconColor">
+        <div [innerHTML]="stat.icon"></div>
+      </div>
+      <div class="text-lg font-semibold text-gray-900 text-center">{{ stat.value }}</div>
+      <div class="text-sm text-gray-600 text-center">{{ stat.label }}</div>
+    </div>
+  </div>
+</div>
