@@ -40,6 +40,6 @@ export class AuthService {
   verifyToken() {
     const token = localStorage.getItem('authToken');
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
-    return this.http.post(this.baseUrl + 'token/verify', headers ? { headers } : {});
+    return this.http.post(this.baseUrl + 'token/verify', {}, { headers });
   }
 }
