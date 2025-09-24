@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -8,10 +9,33 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class ProfileComponent implements OnInit{
   user: any = null;
+  showPreferencesModal = false;
+  preferencesForm!: FormGroup;
 
   constructor(
     private authService: AuthService,
-  ) {}
+    private fb: FormBuilder,
+  ) {
+    this.preferencesForm = this.fb.group({
+      accommodation: ['', Validators.required],
+      arrivalDate: [''],
+      departureDate: [''],
+      foodPreference: ['', Validators.required]
+    });
+
+    // Dynamic validation
+    this.preferencesForm.get('accommodation')?.valueChanges.subscribe(value => {
+      if (value === 'true') {
+        this.preferencesForm.get('arrivalDate')?.setValidators([Validators.required]);
+        this.preferencesForm.get('departureDate')?.setValidators([Validators.required]);
+      } else {
+        this.preferencesForm.get('arrivalDate')?.clearValidators();
+        this.preferencesForm.get('departureDate')?.clearValidators();
+      }
+      this.preferencesForm.get('arrivalDate')?.updateValueAndValidity();
+      this.preferencesForm.get('departureDate')?.updateValueAndValidity();
+    });
+  }
 
   ngOnInit(): void {
     this.authService.getUserData().subscribe({
@@ -46,5 +70,21 @@ export class ProfileComponent implements OnInit{
 
     localStorage.removeItem('authToken');
     window.location.href = '/login'; // Redirect to login page
+  }
+
+  openPreferencesModal() {
+    this.showPreferencesModal = true;
+  }
+
+  closePreferencesModal() {
+    this.showPreferencesModal = false;
+    this.preferencesForm.reset();
+  }
+
+  submitPreferences() {
+    if (this.preferencesForm.valid) {
+      console.log("Preferences:", this.preferencesForm.value);
+      this.closePreferencesModal();
+    }
   }
 }
