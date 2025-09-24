@@ -34,6 +34,7 @@
     <div class="flex items-center justify-between mb-4">
       <h3 class="text-lg font-bold text-gray-800">Profile Details</h3>
       <button 
+      *ngIf="user.status === 'pending'"
         class="px-4 py-1 bg-gradient-to-r from-red-500 to-blue-500 text-white rounded-lg text-sm shadow hover:opacity-90"
         (click)="openPreferencesModal()">
         Add Preferences
@@ -45,7 +46,7 @@
       <div *ngIf="user.fullName"><span class="font-semibold">Full Name:</span> {{ user.fullName }}</div>
       <div *ngIf="user.email"><span class="font-semibold">Email Address:</span> {{ user.email }}</div>
       <div *ngIf="user.phone"><span class="font-semibold">Phone Number:</span> {{ user.phone }}</div>
-      <div *ngIf="user.status"><span class="font-semibold">Current Status:</span> {{ user.status }}</div>
+      <div *ngIf="user.status"><span class="font-semibold">Preference Status:</span> {{ user.status }}</div>
     </div>
   </div>
 
@@ -67,6 +68,28 @@
       <div *ngIf="user.cab.startingPlace"><span class="font-semibold">Starting Place:</span> {{ user.cab.startingPlace }}</div>
       <div *ngIf="user.cab.middleStop"><span class="font-semibold">Middle Stopage Point:</span> {{ user.cab.middleStop }}</div>
       <div *ngIf="user.cab.endingLocation"><span class="font-semibold">Ending Location:</span> {{ user.cab.endingLocation }}</div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 mt-6" *ngIf="userPreference">
+    <h3 class="text-lg font-bold text-gray-800 mb-4">User Preferences</h3>
+    <div class="space-y-2 text-sm">
+      <div>
+        <span class="font-semibold">Accommodation Required:</span>
+        {{ userPreference.accommodationRequired ? 'Yes' : 'No' }}
+      </div>
+      <div *ngIf="userPreference.arrivalDate">
+        <span class="font-semibold">Arrival Date:</span>
+        {{ userPreference.arrivalDate | date:'mediumDate' }}
+      </div>
+      <div *ngIf="userPreference.departureDate">
+        <span class="font-semibold">Departure Date:</span>
+        {{ userPreference.departureDate | date:'mediumDate' }}
+      </div>
+      <div>
+        <span class="font-semibold">Food Preference:</span>
+        {{ userPreference.foodPreference | titlecase }}
+      </div>
     </div>
   </div>
 </div>

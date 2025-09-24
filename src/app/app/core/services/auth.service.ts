@@ -42,4 +42,16 @@ export class AuthService {
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http.post(this.baseUrl + 'token/verify', {}, { headers });
   }
+
+  addUserPreference(preferences: any) {
+    const token = localStorage.getItem('authToken');
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.post(this.baseUrl + 'userPreference/', preferences, { headers });
+  }
+
+  getUserPreference() {
+    const token = localStorage.getItem('authToken');
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.get(this.baseUrl + 'userPreference/', { headers });
+  }
 }
