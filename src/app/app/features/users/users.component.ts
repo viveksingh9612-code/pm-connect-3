@@ -19,6 +19,8 @@ export class UsersComponent implements OnInit {
 
   firstNameFilter: string = '';
 
+  selectedUser: any = null;
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -63,5 +65,13 @@ export class UsersComponent implements OnInit {
     const startIndex = (page - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
+  }
+
+  openUserModal(user: any) {
+    this.selectedUser = user;
+  }
+
+  closeUserModal() {
+    this.selectedUser = null;
   }
 }

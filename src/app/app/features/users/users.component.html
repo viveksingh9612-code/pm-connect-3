@@ -38,7 +38,8 @@
       </thead>
       <tbody class="divide-y divide-gray-200">
         <tr *ngFor="let user of paginatedUsers; let i = index" 
-            class="hover:bg-gray-50 transition duration-200">
+            class="hover:bg-gray-50 transition duration-200 cursor-pointer"
+            (click)="openUserModal(user)">
           <td class="px-4 py-3 font-medium text-gray-700">
             {{ (currentPage - 1) * pageSize + i + 1 }}
           </td>
@@ -96,3 +97,35 @@
   </div>
 
 </div>
+
+<!-- User Details Modal -->
+<div *ngIf="selectedUser" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative">
+    
+    <!-- Close Button -->
+    <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-700" (click)="closeUserModal()">
+      ✕
+    </button>
+
+    <h2 class="text-xl font-bold text-gray-800 mb-4">User Information</h2>
+
+    <div class="space-y-2 text-sm text-gray-700">
+      <div><span class="font-semibold">Employee ID:</span> {{ selectedUser.username }}</div>
+      <div><span class="font-semibold">Full Name:</span> {{ [selectedUser.firstName, selectedUser.middleName, selectedUser.lastName].join(' ') }}</div>
+      <div><span class="font-semibold">Gender:</span> {{ selectedUser.gender }}</div>
+      <div><span class="font-semibold">Post:</span> {{ selectedUser.post }}</div>
+      <div><span class="font-semibold">Role:</span> {{ selectedUser.role }}</div>
+      <div><span class="font-semibold">Project:</span> {{ selectedUser.project }}</div>
+      <div><span class="font-semibold">Email:</span> {{ selectedUser.email }}</div>
+      <div><span class="font-semibold">Phone Number:</span> {{ selectedUser.phoneNumber }}</div>
+      <div><span class="font-semibold">User Preference:</span> {{ selectedUser.userPreference }}</div>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" (click)="closeUserModal()">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
