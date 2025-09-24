@@ -62,44 +62,73 @@
 <section class="my-10 px-4 max-w-7xl mx-auto">
   <h2 class="text-2xl font-bold mb-6 text-blue-800">📄 Documents</h2>
   <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <!-- Sample Docs -->
-    <li class="flex items-center bg-white rounded-lg shadow p-3 hover:shadow-lg transition">
-      <span class="inline-flex w-8 h-8 items-center justify-center text-red-600 mr-3">
-        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
-          <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 12.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/>
-        </svg>
-      </span>
-      <a href="https://example.com/sample.pdf" target="_blank" class="text-blue-700 font-medium hover:underline">Sample Document.pdf</a>
-    </li>
-
-    <!-- Dynamic Docs -->
-    <li *ngFor="let doc of documents" class="flex items-center bg-white rounded-lg shadow p-3 hover:shadow-lg transition">
+    <li 
+      *ngFor="let doc of documents" 
+      class="flex items-center bg-white rounded-lg shadow p-3 hover:shadow-lg transition cursor-pointer"
+      (click)="openDoc(doc)"
+    >
       <span class="inline-flex w-8 h-8 items-center justify-center text-blue-600 mr-3">
         <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 12.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
       </span>
-      <a [href]="doc.url" target="_blank" class="text-blue-700 font-medium hover:underline">{{ doc.name }}</a>
+      <span class="text-blue-700 font-medium hover:underline">{{ doc.name }}</span>
     </li>
   </ul>
 </section>
 
+<!-- Modal -->
+<div 
+  *ngIf="selectedDoc" 
+  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+  (click)="closeDoc()"
+>
+  <div class="relative max-w-4xl w-full h-[80vh] bg-white rounded-lg p-4" (click)="$event.stopPropagation()">
+    <iframe 
+      [src]="selectedDoc.url" 
+      class="w-full h-full rounded" 
+      frameborder="0">
+    </iframe>
+    <button 
+      class="absolute top-2 right-2 text-gray-700 text-2xl font-bold" 
+      (click)="closeDoc()"
+    >
+      &times;
+    </button>
+  </div>
+</div>
+
+
 <!-- Images Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto">
   <h2 class="text-2xl font-bold mb-6 text-blue-800">🖼️ Event Images</h2>
+  
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    <img src="https://via.placeholder.com/300x200" alt="Sample Image 1" class="rounded-lg shadow hover:scale-105 transition">
-    <img src="https://via.placeholder.com/300x200" alt="Sample Image 2" class="rounded-lg shadow hover:scale-105 transition">
-    <img src="https://via.placeholder.com/300x200" alt="Sample Image 3" class="rounded-lg shadow hover:scale-105 transition">
-    <img src="https://via.placeholder.com/300x200" alt="Sample Image 4" class="rounded-lg shadow hover:scale-105 transition">
+    <div *ngFor="let img of images">
+      <img 
+        [src]="img.src" 
+        [alt]="img.alt" 
+        class="rounded-lg shadow hover:scale-105 transition cursor-pointer" 
+        (click)="openModal(img)"
+      />
+    </div>
   </div>
 </section>
 
-<!-- Profile Section -->
-<section class="my-10 px-4 max-w-7xl mx-auto text-center">
-  <h2 class="text-2xl font-bold mb-4 text-blue-800">👤 Profile</h2>
-  <a routerLink="/profile" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-red-600 transition">
-    Go to Profile
-  </a>
-</section>
+<!-- Modal -->
+<div 
+  *ngIf="selectedImage" 
+  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+  (click)="closeModal()"
+>
+  <div class="relative max-w-3xl w-full p-4" (click)="$event.stopPropagation()">
+    <img [src]="selectedImage.src" [alt]="selectedImage.alt" class="rounded-lg shadow-lg w-full h-auto" />
+    <button 
+      class="absolute top-2 right-2 text-white text-2xl font-bold" 
+      (click)="closeModal()"
+    >
+      &times;
+    </button>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-blue-700 to-red-700 text-white py-6 mt-10">
