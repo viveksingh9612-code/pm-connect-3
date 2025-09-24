@@ -36,13 +36,16 @@
     <!-- Example YouTube video -->
     <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-3">
       <div class="aspect-w-16 aspect-h-9 mb-3">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                frameborder="0"
-                allowfullscreen
-                class="w-full h-48 rounded">
-        </iframe>
+        <video
+            class="rounded-lg shadow-md w-full h-auto"
+            controls
+            preload="metadata"
+          >
+            <source src="/assets/videos/teaser-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
       </div>
-      <div class="text-sm font-medium text-gray-700">Sample Event Highlight</div>
+      <div class="text-sm font-medium text-gray-700">Event Teaser</div>
     </div>
 
     <!-- Dynamic videos -->
