@@ -28,7 +28,7 @@ export class BulkCabDetailsComponent implements OnInit{
         "startingPoint": "Hotel Holiday inn",
         "middleStoppagePoints": "NA",
         "stoppingPoint": "Jakson HO",
-        "users": "123456"
+        "users": "123456, 1234567"
       }
     ]);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
