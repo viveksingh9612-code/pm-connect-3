@@ -1,10 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  isMobile = false;
+  username = '';
+  password = '';
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.checkMobile();
+  }
+
+  @HostListener('window:resize')
+  checkMobile() {
+    this.isMobile = window.innerWidth < 768;
+  }
+
+  onLogin(): void {
+    this.authService.userLogin(this.username, this.password).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+
+        localStorage.setItem('authToken', (response as any).token);
+
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        alert('Login failed. Please check your credentials and try again.');
+      }
+    });
+  }
 }

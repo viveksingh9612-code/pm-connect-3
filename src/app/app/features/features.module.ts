@@ -15,6 +15,12 @@ import { HelpComponent } from './landing/help/help.component';
 import { HeroComponent } from './landing/hero/hero.component';
 import { TestimonialsComponent } from './landing/testimonials/testimonials.component';
 import { WorkingComponent } from './landing/working/working.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BulkSignUpComponent } from './bulk-sign-up/bulk-sign-up.component';
+import { UsersComponent } from './users/users.component';
+import { DriversComponent } from './drivers/drivers.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
@@ -22,6 +28,11 @@ import { WorkingComponent } from './landing/working/working.component';
   declarations: [
     MainComponent,
     LoginComponent,
+    DashboardComponent,
+    BulkSignUpComponent,
+    UsersComponent,
+    DriversComponent,
+    AdminDashboardComponent,
 
     AnalyticsComponent,
     ContactComponent,
@@ -37,7 +48,9 @@ import { WorkingComponent } from './landing/working/working.component';
   ],
   imports: [
     CommonModule,
-    FeatureRoutingModule
+    FeatureRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class FeaturesModule { }

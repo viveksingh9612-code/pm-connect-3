@@ -1,0 +1,59 @@
+<!-- Header Section -->
+<div class="mx-auto mb-6 flex items-center justify-between px-6 py-3 bg-gradient-to-r from-blue-500 to-red-500 shadow-md">
+  <!-- Back Icon -->
+  <button class="text-white hover:text-gray-200">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Logo -->
+  <img src="assets/logo/logo.png" alt="Logo" class="h-8 w-auto">
+</div>
+
+<div class="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
+  <h2 class="text-3xl font-extrabold text-gray-900 mb-6">All Users</h2>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full border-collapse text-sm">
+      <thead>
+        <tr class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white uppercase text-xs tracking-wider">
+          <th class="px-4 py-3 text-left rounded-tl-lg">#</th>
+          <th class="px-4 py-3 text-left">Full Name</th>
+          <th class="px-4 py-3 text-left">Email</th>
+          <th class="px-4 py-3 text-left">Role</th>
+          <th class="px-4 py-3 text-left rounded-tr-lg">Phone</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr class="hover:bg-gray-50 transition duration-200">
+          <td class="px-4 py-3 font-medium text-gray-700">1</td>
+          <td class="px-4 py-3 text-gray-800">John Doe</td>
+          <td class="px-4 py-3 text-gray-600">john.doe&#64;email.com</td>
+          <td class="px-4 py-3">
+            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold bg-green-500">User</span>
+          </td>
+          <td class="px-4 py-3 text-gray-700">+91-9876543210</td>
+        </tr>
+        <tr class="hover:bg-gray-50 transition duration-200">
+          <td class="px-4 py-3 font-medium text-gray-700">2</td>
+          <td class="px-4 py-3 text-gray-800">Alice Smith</td>
+          <td class="px-4 py-3 text-gray-600">alice.smith&#64;email.com</td>
+          <td class="px-4 py-3">
+            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold bg-red-500">Admin</span>
+          </td>
+          <td class="px-4 py-3 text-gray-700">+91-9988776655</td>
+        </tr>
+        <!-- Add more rows dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination (optional) -->
+  <div class="mt-4 flex justify-end items-center space-x-2">
+    <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">Previous</button>
+    <button class="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">1</button>
+    <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">2</button>
+    <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">Next</button>
+  </div>
+</div>

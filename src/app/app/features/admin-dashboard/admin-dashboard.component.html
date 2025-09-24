@@ -1,0 +1,61 @@
+<!-- Header Section -->
+<div class="mx-auto mb-6 flex items-center justify-between px-6 py-3 bg-gradient-to-r from-blue-500 to-red-500 shadow-md">
+  <!-- Back Icon -->
+  <button class="text-white hover:text-gray-200">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Logo -->
+  <img src="assets/logo/logo.png" alt="Logo" class="h-8 w-auto">
+</div>
+
+<div class="min-h-screen bg-gray-100 p-6">
+  <h1 class="text-4xl font-extrabold text-gray-900 mb-8">Admin Dashboard</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Users Card -->
+    <a href="/users" class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <div class="flex items-center space-x-4">
+        <div class="bg-blue-500 text-white p-3 rounded-full">
+          <!-- Icon: User -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900">Users</h2>
+      </div>
+      <p class="mt-2 text-gray-500 text-sm">View and manage all registered users.</p>
+    </a>
+
+    <!-- Drivers Card -->
+    <a href="/drivers" class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <div class="flex items-center space-x-4">
+        <div class="bg-green-500 text-white p-3 rounded-full">
+          <!-- Icon: Steering Wheel -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m8.485-8.485l-1.414 1.414M4.929 4.929l1.414 1.414M21 12h-2M5 12H3m16.071-4.929l-1.414-1.414M6.343 17.657l-1.414-1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900">Drivers</h2>
+      </div>
+      <p class="mt-2 text-gray-500 text-sm">View and manage all drivers and their routes.</p>
+    </a>
+
+    <!-- Bulk Sign-Up Card -->
+    <a href="/bulk-sign-up" class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition transform hover:-translate-y-1">
+      <div class="flex items-center space-x-4">
+        <div class="bg-purple-500 text-white p-3 rounded-full">
+          <!-- Icon: Upload -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v4h16v-4M12 12v8m0 0l-4-4m4 4l4-4m-4-8V4m0 0l-4 4m4-4l4 4" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900">Bulk Sign-Up</h2>
+      </div>
+      <p class="mt-2 text-gray-500 text-sm">Upload files to register multiple users at once.</p>
+    </a>
+  </div>
+</div>

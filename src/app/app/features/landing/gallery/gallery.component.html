@@ -1,42 +1,46 @@
 <div class="container mx-auto py-12 px-4">
+  <!-- Title -->
   <div class="text-4xl font-semibold text-gray-900 mb-8 text-center">
     <span class="text-blue-600">Event</span> <span class="text-red-600">Gallery</span>
   </div>
 
-  <p class="text-lg text-gray-600 mb-6 text-center">Browse through memorable moments from past PM Connect events</p>
+  <p class="text-lg text-gray-600 mb-10 text-center">Browse through memorable moments from past PM Connect events</p>
 
-  <!-- Event Tabs -->
+  <!-- Tabs -->
   <div class="flex justify-center space-x-6 mb-8">
-    <button class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition duration-300 font-semibold">
-      PM Connect 3.0
-    </button>
-    <button class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300 font-semibold">
-      PM Connect 2.0
-    </button>
-    <button class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 font-semibold">
-      PM Connect 1.0
+    <button
+      *ngFor="let tab of tabs"
+      class="px-6 py-3 rounded-lg font-semibold transition duration-300"
+      [ngClass]="{
+        'bg-red-500 text-white': tab.key === '3.0' && activeTab === '3.0',
+        'bg-blue-500 text-white': tab.key === '2.0' && activeTab === '2.0',
+        'bg-gray-700 text-white': tab.key === '1.0' && activeTab === '1.0',
+        'bg-gray-200 text-gray-700 hover:bg-gray-300': activeTab !== tab.key
+      }"
+      (click)="setTab(tab.key)">
+      {{ tab.label }}
     </button>
   </div>
 
-  <!-- Gallery Images -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+1" alt="Event 1" class="w-full h-48 object-cover"/>
-    </div>
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+2" alt="Event 2" class="w-full h-48 object-cover"/>
-    </div>
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+3" alt="Event 3" class="w-full h-48 object-cover"/>
-    </div>
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+4" alt="Event 4" class="w-full h-48 object-cover"/>
-    </div>
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+5" alt="Event 5" class="w-full h-48 object-cover"/>
-    </div>
-    <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-      <img src="https://via.placeholder.com/600x400.png?text=Event+6" alt="Event 6" class="w-full h-48 object-cover"/>
+  <!-- Gallery Section -->
+  <div>
+    <h2
+      class="text-2xl font-bold mb-6 text-center"
+      [ngClass]="{
+        'text-red-600': activeTab === '3.0',
+        'text-blue-600': activeTab === '2.0',
+        'text-gray-700': activeTab === '1.0'
+      }"
+    >
+      {{ activeTabLabel }}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div *ngFor="let img of images" class="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+        <img [src]="img.url" [alt]="img.alt" class="w-full h-48 object-cover"/>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Alpine.js (required for tab switching) -->
+<script src="https://unpkg.com/alpinejs" defer></script>
