@@ -1,7 +1,7 @@
 <!-- Header Section -->
 <div class="mx-auto mb-6 flex items-center justify-between px-6 py-3 bg-gradient-to-r from-blue-500 to-red-500 shadow-md">
   <!-- Back Icon -->
-  <button class="text-white hover:text-gray-200">
+  <button class="text-white hover:text-gray-200" (click)="goBack()">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
@@ -13,6 +13,17 @@
 
 <div class="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
   <h2 class="text-3xl font-extrabold text-gray-900 mb-6">All Users</h2>
+
+  <!-- Filter Section -->
+  <div class="mb-4 flex justify-end">
+    <input
+      type="text"
+      placeholder="Filter by first name..."
+      [(ngModel)]="firstNameFilter"
+      (input)="applyFilter()"
+      class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+    />
+  </div>
 
   <div class="overflow-x-auto">
     <table class="min-w-full border-collapse text-sm">
@@ -26,8 +37,11 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
-        <tr *ngFor="let user of users; let i = index" class="hover:bg-gray-50 transition duration-200">
-          <td class="px-4 py-3 font-medium text-gray-700">{{ i + 1 }}</td>
+        <tr *ngFor="let user of paginatedUsers; let i = index" 
+            class="hover:bg-gray-50 transition duration-200">
+          <td class="px-4 py-3 font-medium text-gray-700">
+            {{ (currentPage - 1) * pageSize + i + 1 }}
+          </td>
           <td class="px-4 py-3 text-gray-800">
             {{ [user.firstName, user.middleName, user.lastName].join(' ') }}
           </td>
@@ -45,10 +59,40 @@
   </div>
 
   <!-- Pagination (optional) -->
-  <div class="mt-4 flex justify-end items-center space-x-2">
+  <!-- <div class="mt-4 flex justify-end items-center space-x-2">
     <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">Previous</button>
     <button class="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">1</button>
     <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">2</button>
     <button class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition">Next</button>
+  </div> -->
+
+  <!-- Pagination -->
+  <div class="mt-4 flex justify-end">
+    <div class="flex items-center space-x-2 overflow-x-auto px-2 py-1">
+      <button 
+        (click)="setPage(currentPage - 1)" 
+        [disabled]="currentPage === 1"
+        class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition disabled:opacity-50">
+        Previous
+      </button>
+
+      <ng-container *ngFor="let page of [].constructor(totalPages); let p = index">
+        <button 
+          (click)="setPage(p + 1)"
+          [class.bg-blue-500]="currentPage === (p + 1)"
+          [class.text-white]="currentPage === (p + 1)"
+          class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-blue-400 transition">
+          {{ p + 1 }}
+        </button>
+      </ng-container>
+
+      <button 
+        (click)="setPage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages"
+        class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition disabled:opacity-50">
+        Next
+      </button>
+    </div>
   </div>
+
 </div>
