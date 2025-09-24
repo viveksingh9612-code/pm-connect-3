@@ -1,31 +1,41 @@
 <!-- Header -->
-<header class="bg-gradient-to-r from-blue-600 to-red-600 text-white shadow-md">
+<header class="bg-gradient-to-r from-blue-600 to-red-600 text-white shadow-md relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-    <!-- Logo -->
+    <!-- Left: Logo -->
     <h1 class="text-2xl font-bold">Event Portal</h1>
 
-    <!-- Nav Links -->
-    <nav class="hidden md:flex space-x-6">
+    <!-- Center: Nav Links (Desktop only) -->
+    <nav class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2">
       <a routerLink="/" class="hover:underline">Home</a>
       <a routerLink="/profile" class="hover:underline">Profile</a>
     </nav>
 
-    <!-- Logout Icon -->
-    <button class="ml-4 p-2 rounded bg-red-500 hover:bg-red-700" (click)="logout()">
+    <!-- Right: Logout (Desktop only) -->
+    <button class="hidden md:block ml-4 p-2 rounded bg-red-500 hover:bg-red-700" (click)="logout()">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"/>
       </svg>
     </button>
 
-    <!-- Mobile Menu Icon -->
-    <button class="md:hidden p-2 rounded bg-red-500 hover:bg-red-700">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Mobile Menu Icon (only on mobile) -->
+    <button 
+      class="md:hidden p-2 rounded bg-red-500 hover:bg-red-700"
+      (click)="isMenuOpen = !isMenuOpen">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
       </svg>
     </button>
   </div>
-</header>
 
+  <!-- Mobile Dropdown Menu -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-gradient-to-r from-blue-600 to-red-600 px-4 pb-4">
+    <nav class="flex flex-col space-y-2">
+      <a routerLink="/" class="hover:underline">Home</a>
+      <a routerLink="/profile" class="hover:underline">Profile</a>
+      <button class="text-left hover:underline" (click)="logout()">Logout</button>
+    </nav>
+  </div>
+</header>
 
 <!-- About Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto text-center">

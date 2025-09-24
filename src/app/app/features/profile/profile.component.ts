@@ -10,7 +10,7 @@ export class ProfileComponent implements OnInit{
   user: any = null;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +34,17 @@ export class ProfileComponent implements OnInit{
         alert('Failed to load user data. Please try again later.');
       }
     });
+  }
+
+  goBack() {
+    window.history.back(); // or use Angular Router: this.router.navigate(['/previous-route']);
+  }
+
+  logout() {
+    // your logout logic
+    console.log('Logging out...');
+
+    localStorage.removeItem('authToken');
+    window.location.href = '/login'; // Redirect to login page
   }
 }

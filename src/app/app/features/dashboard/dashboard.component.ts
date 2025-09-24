@@ -26,6 +26,8 @@ interface Document {
 })
 
 export class DashboardComponent implements OnInit{
+  isMenuOpen = false;
+
   videos: { title: string, url: SafeResourceUrl }[] = [];
 
   selectedImage: Image | null = null;
