@@ -22,6 +22,7 @@ import { UsersComponent } from './users/users.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 
 
 
@@ -35,6 +36,7 @@ import { ProfileComponent } from './profile/profile.component';
     DriversComponent,
     AdminDashboardComponent,
     ProfileComponent,
+    UserPreferencesComponent,
 
     AnalyticsComponent,
     ContactComponent,

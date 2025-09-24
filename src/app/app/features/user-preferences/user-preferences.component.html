@@ -1,0 +1,105 @@
+<!-- Header Section -->
+<div class="mx-auto mb-6 flex items-center justify-between px-6 py-3 bg-gradient-to-r from-blue-500 to-red-500 shadow-md">
+  <!-- Back Icon -->
+  <button class="text-white hover:text-gray-200" (click)="goBack()">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Logo -->
+  <img src="assets/logo/logo.png" alt="Logo" class="h-8 w-auto">
+</div>
+
+<div class="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-2xl">
+  <h2 class="text-3xl font-extrabold text-gray-900 mb-6">User Preferences</h2>
+
+  <div class="mb-4 flex items-center justify-between">
+    <!-- Download Button -->
+    <button
+      class="px-4 py-2 bg-gradient-to-r from-blue-600 to-red-600 text-white rounded-md shadow hover:opacity-90 transition"
+      (click)="downloadData()">
+      Download Data
+    </button>
+
+    <!-- Filter Input -->
+    <input
+      type="text"
+      placeholder="Filter by name or username..."
+      [(ngModel)]="nameFilter"
+      (input)="applyFilter()"
+      class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+    />
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full border-collapse text-sm">
+      <thead>
+        <tr class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white uppercase text-xs tracking-wider">
+          <th class="px-4 py-3 text-left rounded-tl-lg">#</th>
+          <th class="px-4 py-3 text-left">Full Name</th>
+          <th class="px-4 py-3 text-left">Username</th>
+          <th class="px-4 py-3 text-left">Email</th>
+          <th class="px-4 py-3 text-left">Phone</th>
+          <th class="px-4 py-3 text-left">Accommodation</th>
+          <th class="px-4 py-3 text-left">Arrival</th>
+          <th class="px-4 py-3 text-left">Departure</th>
+          <th class="px-4 py-3 text-left rounded-tr-lg">Food</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr *ngFor="let pref of paginatedPreferences; let i = index" class="hover:bg-gray-50 transition duration-200">
+          <td class="px-4 py-3 font-medium text-gray-700">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td class="px-4 py-3 text-gray-800">
+            {{ [pref.userId?.firstName, pref.userId?.middleName, pref.userId?.lastName].join(' ') }}
+          </td>
+          <td class="px-4 py-3 text-gray-600">{{ pref.userId?.username }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ pref.userId?.email }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ pref.userId?.phoneNumber }}</td>
+          <td class="px-4 py-3 text-gray-700">
+            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold"
+                  [ngClass]="pref.accommodationRequired ? 'bg-green-500' : 'bg-red-500'">
+              {{ pref.accommodationRequired ? 'Yes' : 'No' }}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-gray-700">
+            {{ pref.arrivalDate ? (pref.arrivalDate | date:'mediumDate') : '-' }}
+          </td>
+          <td class="px-4 py-3 text-gray-700">
+            {{ pref.departureDate ? (pref.departureDate | date:'mediumDate') : '-' }}
+          </td>
+          <td class="px-4 py-3 text-gray-700">{{ pref.foodPreference | titlecase }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mt-4 flex justify-end">
+    <div class="flex items-center space-x-2 overflow-x-auto px-2 py-1">
+      <button 
+        (click)="setPage(currentPage - 1)" 
+        [disabled]="currentPage === 1"
+        class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition disabled:opacity-50">
+        Previous
+      </button>
+
+      <ng-container *ngFor="let page of [].constructor(totalPages); let p = index">
+        <button 
+          (click)="setPage(p + 1)"
+          [class.bg-blue-500]="currentPage === (p + 1)"
+          [class.text-white]="currentPage === (p + 1)"
+          class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-blue-400 transition">
+          {{ p + 1 }}
+        </button>
+      </ng-container>
+
+      <button 
+        (click)="setPage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages"
+        class="flex-shrink-0 px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition disabled:opacity-50">
+        Next
+      </button>
+    </div>
+  </div>
+</div>

@@ -113,4 +113,8 @@ export class BulkSignUpComponent implements OnInit{
       }
     });
   }
+
+  goBack() {
+    window.history.back(); // or use Angular Router: this.router.navigate(['/previous-route']);
+  }
 }

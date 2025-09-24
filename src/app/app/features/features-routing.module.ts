@@ -8,6 +8,7 @@ import { BulkSignUpComponent } from "./bulk-sign-up/bulk-sign-up.component";
 import { DriversComponent } from "./drivers/drivers.component";
 import { UsersComponent } from "./users/users.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
+import { UserPreferencesComponent } from "./user-preferences/user-preferences.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent
+  },
+  {
+    path: 'user-preferences',
+    component: UserPreferencesComponent
   },
   {
     path: 'admin-dashboard',
