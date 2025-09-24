@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-bulk-sign-up',
   templateUrl: './bulk-sign-up.component.html',
   styleUrl: './bulk-sign-up.component.css'
 })
-export class BulkSignUpComponent {
+export class BulkSignUpComponent implements OnInit{
   data: any[] = [];
+
+  constructor(
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    
+  }
 
   exportTemplate(): void {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([
@@ -66,33 +75,7 @@ export class BulkSignUpComponent {
       // Sample mapping logic for demonstration
       const users = json.map((row, idx) => {
         // Use sample usernames/emails for demonstration as per your prompt
-        if (idx === 0) {
-          return {
-            username: "12346",
-            firstName: row['firstName'] || row['First Name'] || '',
-            middleName: row['middleName'] || row['Middle Name'] || '',
-            lastName: row['lastName'] || row['Last Name'] || '',
-            gender: row['gender'] || '',
-            post: row['post'] || '',
-            role: row['role'] || '',
-            project: row['project'] || '',
-            email: "jdoe123f@example.com",
-            phoneNumber: row['phoneNumber'] || row['Phone Number'] || ''
-          };
-        } else if (idx === 1) {
-          return {
-            username: "123457",
-            firstName: row['firstName'] || row['First Name'] || '',
-            middleName: row['middleName'] || row['Middle Name'] || '',
-            lastName: row['lastName'] || row['Last Name'] || '',
-            gender: row['gender'] || '',
-            post: row['post'] || '',
-            role: row['role'] || '',
-            project: row['project'] || '',
-            email: "asmith123a@example.com",
-            phoneNumber: row['phoneNumber'] || row['Phone Number'] || ''
-          };
-        } else {
+        
           // Default mapping for any additional rows
           return {
             username: row['username'] || '',
@@ -106,11 +89,28 @@ export class BulkSignUpComponent {
             email: row['email'] || '',
             phoneNumber: row['phoneNumber'] || row['Phone Number'] || ''
           };
-        }
+        
       });
 
       console.log(users);
+
+      this.data = users;
     };
     reader.readAsBinaryString(target.files[0]);
+  }
+
+  uploadData(): void {
+    console.log('Uploading data:', this.data);
+
+    this.authService.bulkSignUp(this.data).subscribe({
+      next: (response) => {
+        console.log('Bulk sign-up successful:', response);
+        alert('Bulk sign-up successful!');
+      },
+      error: (error) => {
+        console.error('Bulk sign-up failed:', error);
+        alert('Bulk sign-up failed. Please try again.');
+      }
+    });
   }
 }

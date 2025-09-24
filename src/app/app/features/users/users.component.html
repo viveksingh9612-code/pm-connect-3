@@ -26,25 +26,20 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
-        <tr class="hover:bg-gray-50 transition duration-200">
-          <td class="px-4 py-3 font-medium text-gray-700">1</td>
-          <td class="px-4 py-3 text-gray-800">John Doe</td>
-          <td class="px-4 py-3 text-gray-600">john.doe&#64;email.com</td>
-          <td class="px-4 py-3">
-            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold bg-green-500">User</span>
+        <tr *ngFor="let user of users; let i = index" class="hover:bg-gray-50 transition duration-200">
+          <td class="px-4 py-3 font-medium text-gray-700">{{ i + 1 }}</td>
+          <td class="px-4 py-3 text-gray-800">
+            {{ [user.firstName, user.middleName, user.lastName].join(' ') }}
           </td>
-          <td class="px-4 py-3 text-gray-700">+91-9876543210</td>
-        </tr>
-        <tr class="hover:bg-gray-50 transition duration-200">
-          <td class="px-4 py-3 font-medium text-gray-700">2</td>
-          <td class="px-4 py-3 text-gray-800">Alice Smith</td>
-          <td class="px-4 py-3 text-gray-600">alice.smith&#64;email.com</td>
+          <td class="px-4 py-3 text-gray-600">{{ user.email }}</td>
           <td class="px-4 py-3">
-            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold bg-red-500">Admin</span>
+            <span class="px-2 py-1 rounded-full text-white text-xs font-semibold"
+                  [ngClass]="user.role === 'admin' ? 'bg-red-500' : 'bg-green-500'">
+              {{ user.role | titlecase }}
+            </span>
           </td>
-          <td class="px-4 py-3 text-gray-700">+91-9988776655</td>
+          <td class="px-4 py-3 text-gray-700">{{ user.phoneNumber }}</td>
         </tr>
-        <!-- Add more rows dynamically -->
       </tbody>
     </table>
   </div>

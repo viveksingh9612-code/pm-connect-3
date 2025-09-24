@@ -21,6 +21,7 @@ import { BulkSignUpComponent } from './bulk-sign-up/bulk-sign-up.component';
 import { UsersComponent } from './users/users.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -33,6 +34,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     UsersComponent,
     DriversComponent,
     AdminDashboardComponent,
+    ProfileComponent,
 
     AnalyticsComponent,
     ContactComponent,

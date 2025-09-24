@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,7 +33,13 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('authToken', (response as any).token);
 
-        this.router.navigate(['/dashboard']);
+        let role = (response as any).user.role;
+
+        if(role === 'admin') {
+          this.router.navigate(['/admin-dashboard']);
+        } else if(role === 'user') {
+          this.router.navigate(['/dashboard']);
+        } 
       },
       error: (error) => {
         console.error('Login failed:', error);
