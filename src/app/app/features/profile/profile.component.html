@@ -59,15 +59,15 @@
   </div>
 
   <!-- Cab Details -->
-  <div class="bg-white rounded-xl shadow-md p-6 mt-6" *ngIf="user.cab && (user.cab.driverName || user.cab.driverNumber || user.cab.cabNumber || user.cab.startingPlace || user.cab.middleStop || user.cab.endingLocation)">
+  <div class="bg-white rounded-xl shadow-md p-6 mt-6" *ngIf="user.cab && (user.cab.driverName || user.cab.driverNumber || user.cab.cabNumber || user.cab.startingPoint || user.cab.middleStoppagePoints || user.cab.stoppingPoint)">
     <h3 class="text-lg font-bold text-gray-800 mb-4">Cab Details</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm">
       <div *ngIf="user.cab.driverName"><span class="font-semibold">Driver Name:</span> {{ user.cab.driverName }}</div>
       <div *ngIf="user.cab.driverNumber"><span class="font-semibold">Driver Number:</span> {{ user.cab.driverNumber }}</div>
       <div *ngIf="user.cab.cabNumber"><span class="font-semibold">Cab Number:</span> {{ user.cab.cabNumber }}</div>
-      <div *ngIf="user.cab.startingPlace"><span class="font-semibold">Starting Place:</span> {{ user.cab.startingPlace }}</div>
-      <div *ngIf="user.cab.middleStop"><span class="font-semibold">Middle Stopage Point:</span> {{ user.cab.middleStop }}</div>
-      <div *ngIf="user.cab.endingLocation"><span class="font-semibold">Ending Location:</span> {{ user.cab.endingLocation }}</div>
+      <div *ngIf="user.cab.startingPoint"><span class="font-semibold">Starting Place:</span> {{ user.cab.startingPoint }}</div>
+      <div *ngIf="user.cab.middleStoppagePoints"><span class="font-semibold">Middle Stopage Point:</span> {{ user.cab.middleStoppagePoints }}</div>
+      <div *ngIf="user.cab.stoppingPoint"><span class="font-semibold">Ending Location:</span> {{ user.cab.stoppingPoint }}</div>
     </div>
   </div>
 

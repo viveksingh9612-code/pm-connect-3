@@ -9,6 +9,7 @@ import { DriversComponent } from "./drivers/drivers.component";
 import { UsersComponent } from "./users/users.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { UserPreferencesComponent } from "./user-preferences/user-preferences.component";
+import { BulkCabDetailsComponent } from "./bulk-cab-details/bulk-cab-details.component";
 
 const routes: Routes = [
   {
@@ -47,7 +48,11 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent
-  }
+  },
+  {
+    path: 'bulk-cab-details',
+    component: BulkCabDetailsComponent
+  },
 ];
 
 @NgModule({

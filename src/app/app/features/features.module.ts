@@ -23,6 +23,7 @@ import { DriversComponent } from './drivers/drivers.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
+import { BulkCabDetailsComponent } from './bulk-cab-details/bulk-cab-details.component';
 
 
 
@@ -32,6 +33,7 @@ import { UserPreferencesComponent } from './user-preferences/user-preferences.co
     LoginComponent,
     DashboardComponent,
     BulkSignUpComponent,
+    BulkCabDetailsComponent,
     UsersComponent,
     DriversComponent,
     AdminDashboardComponent,

@@ -60,4 +60,16 @@ export class AuthService {
     const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
     return this.http.get(this.baseUrl + 'userPreference/all', { headers });
   }
+
+  uploadBulkCabRequests(cabRequests: any[]) {
+    const token = localStorage.getItem('authToken');
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.post(this.baseUrl + 'cab/allocate', cabRequests, { headers });
+  }
+
+  getAllCabDrivers() {
+    const token = localStorage.getItem('authToken');
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.get(this.baseUrl + 'cab/drivers', { headers });
+  }
 }
