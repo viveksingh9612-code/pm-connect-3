@@ -7,10 +7,15 @@
     <!-- Nav Links -->
     <nav class="hidden md:flex space-x-6">
       <a routerLink="/" class="hover:underline">Home</a>
-      <a routerLink="/videos" class="hover:underline">Videos</a>
-      <a routerLink="/documents" class="hover:underline">Documents</a>
       <a routerLink="/profile" class="hover:underline">Profile</a>
     </nav>
+
+    <!-- Logout Icon -->
+    <button class="ml-4 p-2 rounded bg-red-500 hover:bg-red-700" (click)="logout()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"/>
+      </svg>
+    </button>
 
     <!-- Mobile Menu Icon -->
     <button class="md:hidden p-2 rounded bg-red-500 hover:bg-red-700">
@@ -20,6 +25,7 @@
     </button>
   </div>
 </header>
+
 
 <!-- About Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto text-center">
