@@ -43,7 +43,9 @@
           <th class="px-4 py-3 text-left">Phone</th>
           <th class="px-4 py-3 text-left">Accommodation</th>
           <th class="px-4 py-3 text-left">Arrival</th>
+          <th class="px-4 py-3 text-left">Arrival Time</th>
           <th class="px-4 py-3 text-left">Departure</th>
+          <th class="px-4 py-3 text-left">Departure Time</th>
           <th class="px-4 py-3 text-left rounded-tr-lg">Food</th>
         </tr>
       </thead>
@@ -66,7 +68,13 @@
             {{ pref.arrivalDate ? (pref.arrivalDate | date:'mediumDate') : '-' }}
           </td>
           <td class="px-4 py-3 text-gray-700">
+            {{ pref.arrivalPreferredTime ? pref.arrivalPreferredTime : '-' }}
+          </td>
+          <td class="px-4 py-3 text-gray-700">
             {{ pref.departureDate ? (pref.departureDate | date:'mediumDate') : '-' }}
+          </td>
+          <td class="px-4 py-3 text-gray-700">
+            {{ pref.departurePreferredTime ? pref.departurePreferredTime : '-' }}
           </td>
           <td class="px-4 py-3 text-gray-700">{{ pref.foodPreference | titlecase }}</td>
         </tr>

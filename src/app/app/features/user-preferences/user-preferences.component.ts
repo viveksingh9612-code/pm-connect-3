@@ -79,8 +79,10 @@ export class UserPreferencesComponent implements OnInit {
       'Phone': pref.userId?.phoneNumber || '',
       'Accommodation': pref.accommodationRequired ? 'Yes' : 'No',
       'Arrival': pref.arrivalDate ? new Date(pref.arrivalDate).toLocaleDateString() : '-',
+      'Arrival Preferred Time': pref.arrivalPreferredTime ? pref.arrivalPreferredTime : '-',
       'Departure': pref.departureDate ? new Date(pref.departureDate).toLocaleDateString() : '-',
-      'Food Preference': pref.foodPreference ? pref.foodPreference : '-'
+      'Deprature Preferred Time': pref.departurePreferredTime ? pref.departurePreferredTime : '-',
+      'Food Preference': pref.foodPreference ? pref.foodPreference : '-',
     }));
 
     // Create a worksheet

@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit{
       accommodation: ['', Validators.required],
       arrivalDate: [''],
       departureDate: [''],
+      arrivalPreferredTime: [''],
+      departurePreferredTime: [''],
       foodPreference: ['', Validators.required]
     });
 
@@ -32,12 +34,18 @@ export class ProfileComponent implements OnInit{
       if (value === 'true') {
         this.preferencesForm.get('arrivalDate')?.setValidators([Validators.required]);
         this.preferencesForm.get('departureDate')?.setValidators([Validators.required]);
+        this.preferencesForm.get('arrivalPreferredTime')?.setValidators([Validators.required]);
+        this.preferencesForm.get('departurePreferredTime')?.setValidators([Validators.required]);
       } else {
         this.preferencesForm.get('arrivalDate')?.clearValidators();
         this.preferencesForm.get('departureDate')?.clearValidators();
+        this.preferencesForm.get('arrivalPreferredTime')?.clearValidators();
+        this.preferencesForm.get('departurePreferredTime')?.clearValidators();
       }
       this.preferencesForm.get('arrivalDate')?.updateValueAndValidity();
       this.preferencesForm.get('departureDate')?.updateValueAndValidity();
+      this.preferencesForm.get('arrivalPreferredTime')?.updateValueAndValidity();
+      this.preferencesForm.get('departurePreferredTime')?.updateValueAndValidity();
     });
   }
 
@@ -72,11 +80,14 @@ export class ProfileComponent implements OnInit{
 
       // Transform values
       const data = {
-        accommodationRequired: raw.accommodation === 'true', // convert string -> boolean
+        accommodationRequired: raw.accommodation === 'true',
         arrivalDate: raw.arrivalDate ? new Date(raw.arrivalDate).toISOString() : null,
         departureDate: raw.departureDate ? new Date(raw.departureDate).toISOString() : null,
+        arrivalPreferredTime: raw.arrivalPreferredTime || null,
+        departurePreferredTime: raw.departurePreferredTime || null,
         foodPreference: raw.foodPreference
       };
+
 
       console.log("Formatted Preferences:", data);
 

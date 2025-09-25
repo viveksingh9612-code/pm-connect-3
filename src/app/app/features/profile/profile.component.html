@@ -119,6 +119,14 @@
         <span class="font-semibold">Departure Date:</span>
         {{ userPreference.departureDate | date:'mediumDate' }}
       </div>
+      <div *ngIf="userPreference.arrivalPreferredTime">
+        <span class="font-semibold">Arrival preferred time:</span>
+        {{ userPreference.arrivalPreferredTime }}
+      </div>
+      <div *ngIf="userPreference.departurePreferredTime">
+        <span class="font-semibold">Departure preferred time:</span>
+        {{ userPreference.departurePreferredTime }}
+      </div>
       <div>
         <span class="font-semibold">Food Preference:</span>
         {{ userPreference.foodPreference | titlecase }}
@@ -169,6 +177,39 @@
           Departure date is required.
         </p>
       </div>
+
+      <!-- Arrival Preferred Time -->
+      <div *ngIf="preferencesForm.get('accommodation')?.value === 'true'">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Arrival Preferred Time</label>
+        <select formControlName="arrivalPreferredTime" class="w-full border rounded-lg px-3 py-2">
+          <option value="">-- Select Time --</option>
+          <option value="00:00 am to 06:00 am">00:00 am to 06:00 am</option>
+          <option value="06:00 am to 12:00 pm">06:00 am to 12:00 pm</option>
+          <option value="12:00 pm to 06:00 pm">12:00 pm to 06:00 pm</option>
+          <option value="06:00 pm to 00:00 am">06:00 pm to 00:00 am</option>
+        </select>
+        <p *ngIf="preferencesForm.get('arrivalPreferredTime')?.invalid && preferencesForm.get('arrivalPreferredTime')?.touched" 
+          class="text-xs text-red-500 mt-1">
+          Arrival preferred time is required.
+        </p>
+      </div>
+
+      <!-- Departure Preferred Time -->
+      <div *ngIf="preferencesForm.get('accommodation')?.value === 'true'">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Departure Preferred Time</label>
+        <select formControlName="departurePreferredTime" class="w-full border rounded-lg px-3 py-2">
+          <option value="">-- Select Time --</option>
+          <option value="00:00 am to 06:00 am">00:00 am to 06:00 am</option>
+          <option value="06:00 am to 12:00 pm">06:00 am to 12:00 pm</option>
+          <option value="12:00 pm to 06:00 pm">12:00 pm to 06:00 pm</option>
+          <option value="06:00 pm to 00:00 am">06:00 pm to 00:00 am</option>
+        </select>
+        <p *ngIf="preferencesForm.get('departurePreferredTime')?.invalid && preferencesForm.get('departurePreferredTime')?.touched" 
+          class="text-xs text-red-500 mt-1">
+          Departure preferred time is required.
+        </p>
+      </div>
+
 
       <!-- Food Preference -->
       <div>
