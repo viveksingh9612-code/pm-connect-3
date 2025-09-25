@@ -1,154 +1,102 @@
 <!-- Header -->
 <header class="bg-gradient-to-r from-blue-600 to-red-600 text-white shadow-md relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-    <!-- Left: Logo -->
-    <h1 class="text-2xl font-bold">Event Portal</h1>
-
-    <!-- Center: Nav Links (Desktop only) -->
-    <nav class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2">
-      <a routerLink="/" class="hover:underline">Home</a>
-      <a routerLink="/profile" class="hover:underline">Profile</a>
-    </nav>
-
-    <!-- Right: Logout (Desktop only) -->
-    <button class="hidden md:block ml-4 p-2 rounded bg-red-500 hover:bg-red-700" (click)="logout()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1"/>
-      </svg>
-    </button>
-
-    <!-- Mobile Menu Icon (only on mobile) -->
-    <button 
-      class="md:hidden p-2 rounded bg-red-500 hover:bg-red-700"
-      (click)="isMenuOpen = !isMenuOpen">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile Dropdown Menu -->
-  <div *ngIf="isMenuOpen" class="md:hidden bg-gradient-to-r from-blue-600 to-red-600 px-4 pb-4">
-    <nav class="flex flex-col space-y-2">
-      <a routerLink="/" class="hover:underline">Home</a>
-      <a routerLink="/profile" class="hover:underline">Profile</a>
-      <button class="text-left hover:underline" (click)="logout()">Logout</button>
-    </nav>
-  </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4"> <!-- Left: Logo -->
+        <h1 class="text-2xl font-bold">Event Portal</h1> <!-- Center: Nav Links (Desktop only) -->
+        <nav class="hidden md:flex space-x-6 absolute left-1/2 transform -translate-x-1/2"> <a routerLink="/"
+                class="hover:underline">Home</a> <a routerLink="/profile" class="hover:underline">Profile</a> </nav>
+        <!-- Right: Logout (Desktop only) --> <button
+            class="hidden md:block ml-4 p-2 rounded bg-red-500 hover:bg-red-700" (click)="logout()"> <svg
+                xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+            </svg> </button> <!-- Mobile Menu Icon (only on mobile) --> <button
+            class="md:hidden p-2 rounded bg-red-500 hover:bg-red-700" (click)="isMenuOpen = !isMenuOpen"> <svg
+                xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg> </button>
+    </div> <!-- Mobile Dropdown Menu -->
+    <div *ngIf="isMenuOpen" class="md:hidden bg-gradient-to-r from-blue-600 to-red-600 px-4 pb-4">
+        <nav class="flex flex-col space-y-2"> <a routerLink="/" class="hover:underline">Home</a> <a
+                routerLink="/profile" class="hover:underline">Profile</a> <button class="text-left hover:underline"
+                (click)="logout()">Logout</button> </nav>
+    </div>
 </header>
 
 <!-- About Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto text-center">
-  <h2 class="text-3xl font-extrabold mb-4 text-blue-700">About the Event</h2>
-  <p class="text-gray-600 text-lg">
-    Welcome to our event portal! Explore highlights through videos, documents, images, and access your profile for personalized content.
-  </p>
+    <h2 class="text-3xl font-extrabold mb-4 text-blue-700">{{ about?.title }}</h2>
+    <p class="text-gray-600 text-lg">{{ about?.description }}</p>
 </section>
 
 <!-- Videos Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6 text-blue-800">🎥 Event Videos</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Example YouTube video -->
-    <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-3">
-      <div class="aspect-w-16 aspect-h-9 mb-3">
-        <video
-            class="rounded-lg shadow-md w-full h-auto"
-            controls
-            preload="metadata"
-          >
-            <source src="/assets/videos/teaser-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-      </div>
-      <div class="text-sm font-medium text-gray-700">Event Teaser</div>
+    <h2 class="text-2xl font-bold mb-6 text-blue-800">🎥 Event Videos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let video of videos" class="bg-white rounded-lg shadow hover:shadow-lg transition p-3">
+            <div class="aspect-w-16 aspect-h-9 mb-3">
+                <video *ngIf="video.type==='video'" class="rounded-lg shadow-md w-full h-auto" controls>
+                    <source [src]="video.url" type="video/mp4">
+                </video>
+                <iframe *ngIf="video.type==='iframe'" [src]="video.url" frameborder="0" allowfullscreen
+                    class="w-full h-48 rounded"></iframe>
+            </div>
+            <div class="text-sm font-medium text-gray-700">{{ video.title }}</div>
+        </div>
     </div>
-
-    <!-- Dynamic videos -->
-    <div *ngFor="let video of videos" class="bg-white rounded-lg shadow hover:shadow-lg transition p-3">
-      <div class="aspect-w-16 aspect-h-9 mb-3">
-        <iframe [src]="video.url" frameborder="0" allowfullscreen class="w-full h-48 rounded"></iframe>
-      </div>
-      <div class="text-sm font-medium text-gray-700">{{ video.title }}</div>
-    </div>
-  </div>
 </section>
 
 <!-- Documents Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6 text-blue-800">📄 Documents</h2>
-  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <li 
-      *ngFor="let doc of documents" 
-      class="flex items-center bg-white rounded-lg shadow p-3 hover:shadow-lg transition cursor-pointer"
-      (click)="openDoc(doc)"
-    >
-      <span class="inline-flex w-8 h-8 items-center justify-center text-blue-600 mr-3">
-        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 12.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
-      </span>
-      <span class="text-blue-700 font-medium hover:underline">{{ doc.name }}</span>
-    </li>
-  </ul>
+    <h2 class="text-2xl font-bold mb-6 text-blue-800">📄 Documents</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <li *ngFor="let doc of documents"
+            class="flex items-center bg-white rounded-lg shadow p-3 hover:shadow-lg transition cursor-pointer"
+            (click)="openDoc(doc)">
+            <span class="inline-flex w-8 h-8 items-center justify-center text-blue-600 mr-3">
+                <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                    <path
+                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 12.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z" />
+                </svg>
+            </span>
+            <span class="text-blue-700 font-medium hover:underline">{{ doc.name }}</span>
+        </li>
+    </ul>
 </section>
 
-<!-- Modal -->
-<div 
-  *ngIf="selectedDoc" 
-  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-  (click)="closeDoc()"
->
-  <div class="relative max-w-4xl w-full h-[80vh] bg-white rounded-lg p-4" (click)="$event.stopPropagation()">
-    <iframe 
-      [src]="selectedDoc.url" 
-      class="w-full h-full rounded" 
-      frameborder="0">
-    </iframe>
-    <button 
-      class="absolute top-2 right-2 text-gray-700 text-2xl font-bold" 
-      (click)="closeDoc()"
-    >
-      &times;
-    </button>
-  </div>
+<!-- Document Modal -->
+<div *ngIf="selectedDoc" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+    (click)="closeDoc()">
+    <div class="relative max-w-4xl w-full h-[80vh] bg-white rounded-lg p-4" (click)="$event.stopPropagation()">
+        <iframe [src]="selectedDoc" class="w-full h-full rounded" frameborder="0"></iframe>
+        <button class="absolute top-2 right-2 text-gray-700 text-2xl font-bold" (click)="closeDoc()">&times;</button>
+    </div>
 </div>
-
 
 <!-- Images Section -->
 <section class="my-10 px-4 max-w-7xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6 text-blue-800">🖼️ Event Images</h2>
-  
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-    <div *ngFor="let img of images">
-      <img 
-        [src]="img.src" 
-        [alt]="img.alt" 
-        class="rounded-lg shadow hover:scale-105 transition cursor-pointer" 
-        (click)="openModal(img)"
-      />
+    <h2 class="text-2xl font-bold mb-6 text-blue-800">🖼️ Event Images</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div *ngFor="let img of images">
+            <img [src]="img.src" [alt]="img.alt" class="rounded-lg shadow hover:scale-105 transition cursor-pointer"
+                (click)="openModal(img)" />
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- Modal -->
-<div 
-  *ngIf="selectedImage" 
-  class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-  (click)="closeModal()"
->
-  <div class="relative max-w-3xl w-full p-4" (click)="$event.stopPropagation()">
-    <img [src]="selectedImage.src" [alt]="selectedImage.alt" class="rounded-lg shadow-lg w-full h-auto" />
-    <button 
-      class="absolute top-2 right-2 text-white text-2xl font-bold" 
-      (click)="closeModal()"
-    >
-      &times;
-    </button>
-  </div>
+<!-- Image Modal -->
+<div *ngIf="selectedImage" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+    (click)="closeModal()">
+    <div class="relative max-w-3xl w-full p-4" (click)="$event.stopPropagation()">
+        <img [src]="selectedImage.src" [alt]="selectedImage.alt" class="rounded-lg shadow-lg w-full h-auto" />
+        <button class="absolute top-2 right-2 text-white text-2xl font-bold" (click)="closeModal()">&times;</button>
+    </div>
 </div>
 
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-blue-700 to-red-700 text-white py-6 mt-10">
-  <div class="max-w-7xl mx-auto px-4 text-center">
-    <p>&copy; 2025 Event Portal. All rights reserved.</p>
-  </div>
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <p>&copy; 2025 Event Portal. All rights reserved.</p>
+    </div>
 </footer>

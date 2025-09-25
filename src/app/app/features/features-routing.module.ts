@@ -10,6 +10,7 @@ import { UsersComponent } from "./users/users.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { UserPreferencesComponent } from "./user-preferences/user-preferences.component";
 import { BulkCabDetailsComponent } from "./bulk-cab-details/bulk-cab-details.component";
+import { MediaLibraryComponent } from "./media-library/media-library.component";
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path: 'bulk-cab-details',
     component: BulkCabDetailsComponent
+  },
+  {
+    path: 'media-library',
+    component: MediaLibraryComponent
   },
 ];
 

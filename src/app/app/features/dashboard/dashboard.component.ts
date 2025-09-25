@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-
+import { DocumentService } from '../../core/services/document.service';
 
 interface GalleryImage {
-  src: string;
-  alt: string;
-}
-
-interface Image {
   src: string;
   alt: string;
 }
@@ -19,106 +15,117 @@ interface Document {
   url: string;
 }
 
+interface Video {
+  title: string;
+  url: SafeResourceUrl;
+  type: 'video' | 'iframe';
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
-
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   isMenuOpen = false;
+  about: any;
+  videos: Video[] = [];
+  images: GalleryImage[] = [];
+  documents: Document[] = [];
 
-  videos: { title: string, url: SafeResourceUrl }[] = [];
-
-  selectedImage: Image | null = null;
-
-  selectedDoc: { name: string, url: SafeResourceUrl } | null = null;
-
-  images: GalleryImage[] = [
-    { src: '/assets/eventpics/1/event1.jpg', alt: 'Event Image 1' },
-    { src: '/assets/eventpics/1/event2.jpg', alt: 'Event Image 2' },
-    { src: '/assets/eventpics/1/event3.jpg', alt: 'Event Image 3' },
-    { src: '/assets/eventpics/1/event4.jpg', alt: 'Event Image 4' },
-    { src: '/assets/eventpics/2/event1.jpg', alt: 'Event Image 5' },
-    { src: '/assets/eventpics/2/event2.jpg', alt: 'Event Image 6' }
-  ]
-
-  rawVideos = [
-    { title: 'Jakson Group', url: 'https://www.youtube.com/embed/eG3LkObFCO4' },
-    { title: 'JAKSON - The Journey of 75+ years', url: 'https://www.youtube.com/embed/Vc_Tb45aUF4' }
-  ];
-
-  documents = [
-    { name: 'Agenda', url: '/assets/documents/agenda.pdf' },
-    { name: 'Safety Booklet', url: '/assets/documents/jaksonsafetybooklet.pdf' },
-    { name: 'JJM Qality Handbook', url: '/assets/documents/qualityhandbookjmm.pdf' },
-    { name: 'RDSS Quality Handbook', url: '/assets/documents/qualityhandbookrdss.pdf' },
-    { name: 'Safety Flayer', url: '/assets/documents/safetyflayer.pdf' }
-    // ...add more as needed
-  ];
+  selectedImage: GalleryImage | null = null;
+  selectedDoc: any = null;
 
   constructor(
     private sanitizer: DomSanitizer,
+    private http: HttpClient,
     private router: Router,
     private authService: AuthService,
-  ) {
-    this.videos = this.rawVideos.map(video => ({
-      title: video.title,
-      url: this.sanitizer.bypassSecurityTrustResourceUrl(video.url)
-    }));
-  }
+    private docService: DocumentService,
+  ) {}
 
   ngOnInit(): void {
-    let token = localStorage.getItem('authToken');
-    if(!token) {
-      this.router.navigate(['/login']); // Redirect to login page
-    } else {
-      // User is authenticated, proceed as normal
-      this.authService.verifyToken().subscribe({
-        next: (response: any) => {
-          console.log('Token is valid:', response);
+    this.loadEventContent();
 
-          if(response.valid) {
-            console.log('User is authenticated');
-          } else {
-            console.log('Invalid token, redirecting to login');
-            localStorage.removeItem('authToken');
-            this.router.navigate(['/login']); // Redirect to login page
-          }
-        },
-        error: (error) => {
-          console.error('Invalid token:', error);
-          localStorage.removeItem('authToken');
-          this.router.navigate(['/login']); // Redirect to login page
-        }
-      });
-    }
+    const token = localStorage.getItem('authToken');
+    if (!token) this.router.navigate(['/login']);
+    else this.verifyToken();
   }
 
-  openModal(img: Image) {
-    this.selectedImage = img;
+  loadEventContent() {
+    this.docService.getFile('h1yjrva0goolv1mhsyoy', "raw").subscribe({
+      next: data => {
+        console.log('Loaded event content from document service:', data);
+
+        this.getDashboardData(data.url);
+      },
+      error: err => {
+        console.error('Failed to load event content from document service', err);
+        // Fallback to static JSON if document service fails
+      }
+    })
+
   }
 
-  closeModal() {
-    this.selectedImage = null;
+  getDashboardData(url: string) {
+    this.http.get<any>(url).subscribe({
+      next: data => {
+        this.about = data.about;
+
+        // Videos: sanitize URLs
+        this.videos = data.videos.map((video: any) => ({
+          title: video.title,
+          type: video.type,
+          url: video.type === 'iframe'
+            ? this.sanitizer.bypassSecurityTrustResourceUrl(video.url)
+            : video.url
+        }));
+
+        // Images
+        this.images = data.images;
+
+        // Documents: sanitize URLs
+        this.documents = data.documents.map((doc: any) => ({
+          name: doc.name,
+          url: doc.url
+        }));
+      },
+      error: err => console.error('Failed to load event content JSON', err)
+    });
   }
 
-  openDoc(doc: Document) {
-    this.selectedDoc = {
-      name: doc.name,
-      url: this.sanitizer.bypassSecurityTrustResourceUrl(doc.url)
-    };
-  }
+  openModal(img: GalleryImage) { this.selectedImage = img; }
+  closeModal() { this.selectedImage = null; }
 
-  closeDoc() {
-    this.selectedDoc = null;
+  openDoc(doc: Document) { 
+    this.getUrl(doc.url, "image").subscribe((res) => {
+      this.selectedDoc = this.sanitizer.bypassSecurityTrustResourceUrl(res.url);
+    });
   }
+  closeDoc() { this.selectedDoc = null; }
 
   logout() {
-    // Clear session, token, or redirect to login
-    console.log('Logging out...');
-
     localStorage.removeItem('authToken');
-    window.location.href = '/login'; // Redirect to login page
+    this.router.navigate(['/login']);
+  }
+
+  verifyToken() {
+    this.authService.verifyToken().subscribe({
+      next: (res: any) => {
+        if (!res.valid) {
+          localStorage.removeItem('authToken');
+          this.router.navigate(['/login']);
+        }
+      },
+      error: err => {
+        console.error(err);
+        localStorage.removeItem('authToken');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  getUrl(id: string, type: string) {
+    return this.docService.getFile(id, type)
   }
 }

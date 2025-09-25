@@ -24,6 +24,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ProfileComponent } from './profile/profile.component';
 import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 import { BulkCabDetailsComponent } from './bulk-cab-details/bulk-cab-details.component';
+import { MediaLibraryComponent } from './media-library/media-library.component';
 
 
 
@@ -39,6 +40,7 @@ import { BulkCabDetailsComponent } from './bulk-cab-details/bulk-cab-details.com
     AdminDashboardComponent,
     ProfileComponent,
     UserPreferencesComponent,
+    MediaLibraryComponent,
 
     AnalyticsComponent,
     ContactComponent,

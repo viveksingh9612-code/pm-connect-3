@@ -1,0 +1,128 @@
+<!-- Header Section -->
+<div class="mx-auto mb-6 flex items-center justify-between px-6 py-3 bg-gradient-to-r from-blue-500 to-red-500 shadow-md">
+  <!-- Back Icon -->
+  <button class="text-white hover:text-gray-200" (click)="goBack()">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Logo -->
+  <img src="assets/logo/logo.png" alt="Logo" class="h-8 w-auto">
+</div>
+
+<div class="min-h-screen bg-gray-100 p-6 space-y-8">
+  <div class="flex items-center justify-between">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Media Management</h1>
+    <!-- Upload button beside header -->
+    <input type="file" (change)="uploadAnyFile($event)" class="hidden" #headerUploadInput>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4" (click)="headerUploadInput.click()">
+      Upload File
+    </button>
+  </div>
+
+  <!-- Videos Section -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-bold text-gray-900">Videos</h2>
+      <input type="file" accept="video/*" (change)="uploadVideo($event)" class="hidden" #videoInput>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="videoInput.click()">Upload Video</button>
+    </div>
+    <p class="text-gray-500">List and update uploaded videos.</p>
+    
+    <div *ngFor="let video of videos" class="flex items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg">
+      <div>
+        <p class="font-medium">{{ video.name }}</p>
+        <video class="w-64 h-36 mt-1 rounded" [src]="video.url" controls></video>
+      </div>
+      <button class="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-500" (click)="updateVideo(video)">Update</button>
+    </div>
+  </div>
+
+  <!-- Images Section -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-bold text-gray-900">Images</h2>
+      <input type="file" accept="image/*" (change)="uploadImage($event)" class="hidden" #imageInput>
+      <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" (click)="imageInput.click()">Upload Image</button>
+    </div>
+    <p class="text-gray-500">List and update uploaded images.</p>
+    
+    <div *ngFor="let image of images" class="flex items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg">
+      <div>
+        <p class="font-medium">{{ image.name }}</p>
+        <img class="w-48 h-48 mt-1 rounded object-cover" [src]="image.url" alt="image"/>
+      </div>
+      <button class="bg-green-400 text-white px-3 py-1 rounded hover:bg-green-500" (click)="updateImage(image)">Update</button>
+    </div>
+  </div>
+
+  <!-- Documents Section -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-bold text-gray-900">Documents</h2>
+      <input type="file" accept=".pdf,.doc,.docx,.txt" (change)="uploadDocument($event)" class="hidden" #docInput>
+      <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600" (click)="docInput.click()">Upload Document</button>
+    </div>
+    <p class="text-gray-500">List and update uploaded documents.</p>
+    
+    <div *ngFor="let doc of documents" class="flex items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg">
+      <div>
+        <p class="font-medium">{{ doc.name }}</p>
+        <a [href]="doc.url" target="_blank" class="text-blue-600 underline mt-1 inline-block">View Document</a>
+      </div>
+      <button class="bg-purple-400 text-white px-3 py-1 rounded hover:bg-purple-500" (click)="updateDocument(doc)">Update</button>
+    </div>
+  </div>
+
+  <!-- JSON Files Section -->
+  <div class="bg-white shadow-lg rounded-2xl p-6 space-y-4">
+    <h2 class="text-2xl font-bold text-gray-900">JSON Files</h2>
+    <p class="text-gray-500">View JSON file names and update them.</p>
+    
+    <div *ngFor="let jsonFile of jsonFiles" class="flex items-center justify-between mb-3 p-2 bg-gray-50 rounded-lg">
+      <div>
+        <p class="font-medium">{{ jsonFile.name }}</p>
+      </div>
+      <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600" (click)="openJsonModal(jsonFile)">Update</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedJson" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" (click)="closeJsonModal()">
+  <div class="relative max-w-3xl w-full bg-white rounded-lg p-6" (click)="$event.stopPropagation()">
+    <h3 class="text-xl font-bold mb-4">{{ selectedJson.name }}</h3>
+
+    <!-- Editable JSON -->
+    <textarea 
+      [(ngModel)]="selectedJsonText" 
+      class="w-full h-96 p-4 border border-gray-300 rounded-lg font-mono text-sm overflow-auto"
+    ></textarea>
+
+    <div class="mt-4 flex justify-end space-x-2">
+      <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400" (click)="closeJsonModal()">Close</button>
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600" (click)="updateJsonFile(selectedJson)">Update</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Header Upload Modal -->
+<div *ngIf="uploadedFile" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" (click)="closeUploadModal()">
+  <div class="relative max-w-md w-full bg-white rounded-lg p-6" (click)="$event.stopPropagation()">
+    <h3 class="text-xl font-bold mb-4">File Uploaded Successfully</h3>
+    
+    <div class="bg-gray-100 p-4 rounded mb-4">
+      <p><strong>Message:</strong> {{ uploadedFile.message }}</p>
+      <p class="mt-2"><strong>URL:</strong> 
+        <input type="text" [value]="uploadedFile.url" readonly class="w-full border border-gray-300 rounded px-2 py-1" />
+      </p>
+      <button class="mt-2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" (click)="copyToClipboard(uploadedFile.url)">Copy URL</button>
+    </div>
+
+    <div class="flex justify-end space-x-2">
+      <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400" (click)="closeUploadModal()">Close</button>
+    </div>
+  </div>
+</div>
+

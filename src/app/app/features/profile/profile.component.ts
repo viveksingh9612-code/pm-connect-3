@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
+import { DocumentService } from '../../core/services/document.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
+    private docService: DocumentService,
   ) {
     this.preferencesForm = this.fb.group({
       accommodation: ['', Validators.required],
@@ -100,7 +102,7 @@ export class ProfileComponent implements OnInit{
       next: (response: any) => {
         // Map API response to user object for the template
         this.user = {
-          avatar: '/assets/profile/default-avatar.png',
+          avatar: response.userImage || '',
           fullName: [response.firstName, response.middleName, response.lastName].filter(Boolean).join(' '),
           role: response.role || '',
           status: response.userPreference || '',
@@ -108,7 +110,8 @@ export class ProfileComponent implements OnInit{
           email: response.email || '',
           phone: response.phoneNumber || '',
           team: response.project || '',
-          cab: response.cabDetail || {}
+          cab: response.cabDetail || {},
+          id: response.uuid || ''
         };
 
         if(response.userPreference !== "pending") {
@@ -132,6 +135,40 @@ export class ProfileComponent implements OnInit{
       error: (error) => {
         console.error('Failed to fetch user preferences:', error);
         alert('Failed to load user preferences. Please try again later.');
+      }
+    });
+  }
+
+  uploadProfileImage(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const userID = this.user?.id;
+    if (!userID) {
+      alert('User ID not found.');
+      return;
+    }
+
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append('userId', userID);          // userId as string
+    formData.append('profileImage', file);      // file
+
+    // Call backend service
+    this.docService.updateProfilePicture(formData).subscribe({
+      next: (response: any) => {
+        console.log('File uploaded successfully:', response);
+
+        const imageUrl = response.userImage || response.url; // Use userImage from API
+
+        // Update user object to reflect new avatar immediately
+        this.user.avatar = imageUrl;
+
+        alert('Profile image updated successfully.');
+      },
+      error: (error) => {
+        console.error('File upload failed:', error);
+        alert('File upload failed. Please try again.');
       }
     });
   }
